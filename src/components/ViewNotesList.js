@@ -1,5 +1,8 @@
+import {useState} from "react";
+import { EditNote } from "./EditNote";
 
-function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions}) {
+function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions, editNote}) {
+    const [edit, setEdit] = useState({flag:false, note:{}});
     function togglePin(note)
     {
         let newList = [{...note,pin:!note.pin},...altNotesList];
@@ -9,6 +12,11 @@ function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAlt
         setAltNotesList(newList);
     }
 
+    function editNote(flag, note)
+    {
+      setEdit({flag:!flag, note:note});
+    }
+  
     function deleteNote(note)
     {
         let oldList = [...notesList];
@@ -18,13 +26,14 @@ function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAlt
 
     return (
         <div>
-            <h3>{heading}</h3>
+            {edit.flag && <EditNote note={edit.note} editNote={editNote} setNotesList={setNotesList} notesList={notesList} colorOptions={colorOptions} tagOptions={tagOptions} deleteNote={deleteNote}/>}
+            { notesList.length!==0 && <h3>{heading}</h3>}
             <div className={nameClass}>
                     {notesList.map(note => {
                         if(tag==="none")
                         {
-                            return <div className="note" style={{backgroundColor:`${note.color}`}}>
-                                <div>{note.title}</div>
+                            return <div className="note" style={{backgroundColor:`${note.color}`}} onClick={() => editNote(note.flag,note)}>
+                                <h3>{note.title}</h3>
                                 <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
                                 <div>{note.note}</div>
                                 <div>
@@ -60,8 +69,8 @@ function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAlt
                         }
                         else if(tag===note.tag)
                         {
-                            return <div className="note" style={{backgroundColor:`${note.color}`}}>
-                                <div>{note.title}</div>
+                            return <div className="note" style={{backgroundColor:`${note.color}`}} onClick={(note) => editNote(note.flag,note)}>
+                                <h3>{note.title}</h3>
                                 <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
                                 <div>{note.note}</div>
                                 <div>

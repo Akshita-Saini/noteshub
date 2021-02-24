@@ -12,5 +12,3 @@ function Header() {
 
 export { Header };
 
-//pinned: [{},{}]
-//unpinned: [{},{}]

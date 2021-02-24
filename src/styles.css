@@ -64,10 +64,6 @@
   }
 
   /*Take Note*/
-  .take-note-container
-  {
-    
-  }
 
   .take-note {
     margin:0 auto;
@@ -110,9 +106,11 @@
 
   .note{
     padding:1rem;
-    min-width:200px;
+    width:200px;
     min-height: 200px;
+    max-width:300px;
     border-radius:5px;
+    margin:2px;
   }
 
   /*Footer*/
@@ -123,3 +121,26 @@
     font-size: smaller;
   }
   
+  /*Edit Note */
+  .outer-div-modal{
+    position:fixed;
+    height:100vh;
+    width:100vw;
+    top:0;
+    left:0;
+    background-color: rgb(58, 58, 58, 0.5);
+    display:flex;
+    justify-content: center;
+  }
+
+  .inner-div-modal{
+    flex:content;
+    background-color:white;
+    color:black;
+    width:400px;
+    min-height:250px;
+    max-height:350px;
+    margin:5rem;
+    border-radius:5px;
+    padding:1rem;
+  }
