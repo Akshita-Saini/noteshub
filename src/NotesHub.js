@@ -50,8 +50,8 @@ function NotesHub() {
       <SideBar selectTag={selectTag} tagOptions={tagOptions} addNewTag={addNewTag} currentTag={tag} />
       <div className="notes-container">
         <TakeNote addNote={addNote} tagOptions={tagOptions} colorOptions={colorOptions}/>
-        <ViewNotesList nameClass="notesList-pinned" heading="Pinned" tag={tag} notesList={pinnedNotesList} setNotesList={setPinnedNotesList} altNotesList={otherNotesList} setAltNotesList={setOtherNotesList} />
-        <ViewNotesList nameClass="notesList-others" heading="Others" tag={tag} notesList={otherNotesList} setNotesList={setOtherNotesList} altNotesList={pinnedNotesList} setAltNotesList={setPinnedNotesList}/>
+        <ViewNotesList nameClass="notesList-pinned" heading="Pinned" tag={tag} notesList={pinnedNotesList} setNotesList={setPinnedNotesList} altNotesList={otherNotesList} setAltNotesList={setOtherNotesList} tagOptions={tagOptions} colorOptions={colorOptions} />
+        <ViewNotesList nameClass="notesList-others" heading="Others" tag={tag} notesList={otherNotesList} setNotesList={setOtherNotesList} altNotesList={pinnedNotesList} setAltNotesList={setPinnedNotesList} tagOptions={tagOptions} colorOptions={colorOptions}/>
       </div>
       </div>
       <Footer />

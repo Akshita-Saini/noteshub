@@ -20,8 +20,11 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
   function handleSubmit(event)
   {
     event.preventDefault();
-    console.log("submitted"+input)
-    addNote({...input, date:new Date(),uuid:uuid() });
+    if(input.title!==""&&input.note!=="")
+    {
+      console.log("submitted"+input)
+      addNote({...input, date:new Date(),uuid:uuid() });
+    }
     setInput({
       title:"",
       note:"",
