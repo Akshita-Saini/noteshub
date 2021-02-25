@@ -1,7 +1,8 @@
-import {useState} from "react";
-import { EditNote } from "./EditNote";
+import { useState } from "react";
+import { EditNote, NoteFooter } from "./index";
 
-function NotesList({nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions}) {
+function NotesList({ nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions }) {
+  
     const [edit, setEdit] = useState({flag:false, note:{}});
     function togglePin(note)
     {
@@ -14,6 +15,7 @@ function NotesList({nameClass, notesList, setNotesList, altNotesList, setAltNote
 
     function editNote(flag, note)
     {
+      console.log(note.title + " " + note.note + " edit note console");
       setEdit({flag:!flag, note:note});
     }
   
@@ -24,87 +26,63 @@ function NotesList({nameClass, notesList, setNotesList, altNotesList, setAltNote
         setNotesList(oldList);
     }
 
+    function Note({note})
+    {
+      return (
+        <div className="note" style={{ backgroundColor: `${note.color}` }} onClick={(event) => {
+          if (event.target.localName!=="button" && event.target.localName!=="select")
+          {
+            editNote(note.flag, note)}
+          }
+         }>
+        <h3>{note.title}</h3>
+        <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
+        <div>{note.note}</div>
+        <NoteFooter
+          note={note}
+          notesList={notesList}
+          setNotesList={setNotesList}
+          colorOptions={colorOptions}
+          tagOptions={tagOptions}
+          deleteNote={deleteNote}
+        />
+    </div>
+      );
+    }
+
     return (
-        <div>
-            {edit.flag && <EditNote note={edit.note} editNote={editNote} setNotesList={setNotesList} notesList={notesList} colorOptions={colorOptions} tagOptions={tagOptions} deleteNote={deleteNote}/>}
-            { notesList.length!==0 && <h3>{heading}</h3>}
-            <div className={nameClass}>
-                    {notesList.map(note => {
-                        if(tag==="none")
-                        {
-                            return <div className="note" style={{backgroundColor:`${note.color}`}} onClick={() => editNote(note.flag,note)}>
-                                <h3>{note.title}</h3>
-                                <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
-                                <div>{note.note}</div>
-                                <div>
-                                  <select
-                                        onChange={(event) => {
-                                        let arrayWithoutNote = notesList.filter(item => item.uuid !== note.uuid);
-                                        setNotesList([...arrayWithoutNote,{...note,color:event.target.value}]);
-                                        }} 
-
-                                        value={note.color}>
-                                        {
-                                        colorOptions.map(color => {
-                                            return <option value={color.value}>{color.name}</option>
-                                        })
-                                        } 
-                                    </select>
-                                    <select
-                                        onChange={(event) => {
-                                        let arrayWithoutNote = notesList.filter(item => item.uuid !== note.uuid);
-                                        setNotesList([...arrayWithoutNote,{...note,tag:event.target.value}]);
-                                        }} 
-
-                                        value={note.tag}>
-                                        {
-                                        tagOptions.map(tag => {
-                                            return <option value={tag.value}>{tag.name}</option>
-                                        })
-                                        } 
-                                    </select>
-                                    <button onClick={() => deleteNote(note)}>DELETE</button>
-                                </div>
-                            </div>;
-                        }
-                        else if(tag===note.tag)
-                        {
-                            return <div className="note" style={{backgroundColor:`${note.color}`}} onClick={(note) => editNote(note.flag,note)}>
-                                <h3>{note.title}</h3>
-                                <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
-                                <div>{note.note}</div>
-                                <div>
-                                <select onChange={(event) => {
-                                        let arrayWithoutNote = notesList.filter(item => item.uuid !== note.uuid);
-                                        setNotesList([...arrayWithoutNote,{...note,color:event.target.value}]);
-                                        }} 
-                                        value={note.color}>
-                                        {
-                                        colorOptions.map(color => {
-                                            return <option value={color.value}>{color.name}</option>
-                                        })
-                                        }
-                                    </select>
-                                    <select
-                                        onChange={(event) => {
-                                        let arrayWithoutNote = notesList.filter(item => item.uuid !== note.uuid);
-                                        setNotesList([...arrayWithoutNote,{...note,tag:event.target.value}]);
-                                        }} 
-
-                                        value={note.tag}>
-                                        {
-                                        tagOptions.map(tag => {
-                                            return <option value={tag.value}>{tag.name}</option>
-                                        })
-                                        } 
-                                    </select>
-                                    <button onClick={() => deleteNote(note)}>DELETE</button>
-                                </div>
-                            </div>;
-                        }
-                        return null;
-                        })}
-                </div>
+      <div>
+        
+        {
+          edit.flag &&
+          
+          <EditNote
+            note={edit.note}
+            editNote={editNote}
+            setNotesList={setNotesList}
+            notesList={notesList}
+            colorOptions={colorOptions}
+            tagOptions={tagOptions}
+            deleteNote={deleteNote}
+          />
+        }
+        
+        {
+          notesList.length !== 0 && <h3>{heading}</h3>
+        }
+          <div className={nameClass}>
+            {notesList.map(note => {
+              if (tag === "none")
+              {
+                return <Note note={ note }/>
+              }
+              else if(tag===note.tag)
+              {
+                return <Note note={ note }/>
+              }
+              return null;
+              })}
+          </div>
         </div>
     );
   }

@@ -17,10 +17,9 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
 
   function handleSubmit(event)
   {
-    console.log("submitted"+input)
+    console.log("submitted"+input.tag)
     if(input.title!=="" || input.note!=="")
     {
-      console.log("submitted"+input)
       addNote({...input, date:new Date(),uuid:uuid() });
     }
     setInput({
@@ -72,7 +71,7 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
           <select onChange={(event) => setInput({...input,tag:event.target.value}) } value={input.tag}>
             {
               tagOptions.map(tag => {
-                return <option value={tag.value}>{tag.name}</option>
+                return <option value={tag}>{tag}</option>
               })
             }
           </select>

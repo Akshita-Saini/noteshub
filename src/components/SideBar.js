@@ -3,6 +3,7 @@ import {useState} from "react";
 function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
 {
   const [input, setInput] = useState("");
+
   function getTagColor(selectedTag, currentTag)
   {
     if(selectedTag===currentTag)
@@ -15,9 +16,9 @@ function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
   {
     return (
       <li
-        style={{ backgroundColor: getTagColor(selectedTag, item.value) }}
-        onClick={() => selectTag(item.value)}>
-        {item.name}
+        style={{ backgroundColor: getTagColor(selectedTag, item) }}
+        onClick={() => selectTag(item)}>
+        {item}
       </li>
     );
   }
@@ -55,7 +56,7 @@ function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
         {
           tagOptions.map(item => {
             return (
-              <TagItem key={item.name} item={item} />
+              <TagItem key={item} item={item} />
             );
           })
         } 

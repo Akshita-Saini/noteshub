@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions, deleteNote})
+function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions})
 { 
     const [input, setInput] = useState({...note});
     function handleSubmit(event){
@@ -42,13 +42,12 @@ function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOpt
           <select onChange={(event) => setInput({...input,tag:event.target.value}) } value={input.tag}>
             {
               tagOptions.map(tag => {
-                return <option value={tag.value}>{tag.name}</option>
+                return <option value={tag}>{tag}</option>
               })
             }
           </select>
           <button onClick={(event) => {handleSubmit(event);}}>Update</button>
            </div>
-           <button onClick={() => editNote(true,{})}>Close</button>
        </div>
    </div>;
 

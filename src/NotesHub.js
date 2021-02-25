@@ -6,12 +6,7 @@ function NotesHub() {
   const [pinnedNotesList, setPinnedNotesList] = useState([]);
   const [otherNotesList, setOtherNotesList] = useState([]);
 
-  const [tagOptions, setTagOptions] =
-    useState([
-      { value: 'urgent', name: 'Urgent' },
-      { value: 'imp', name: 'IMP' },
-      { value: 'read', name: 'Read' }
-    ]);
+  const [tagOptions, setTagOptions] = useState(['Urgent', 'IMP', 'TO-DO']);
   const [tag, setTag] = useState("none");
 
   const colorOptions = [
@@ -29,7 +24,7 @@ function NotesHub() {
 
   function addNewTag(newTag)
   {
-    setTagOptions([...tagOptions,{value:newTag.toLowerCase(),name:newTag}]);
+    setTagOptions([...tagOptions, newTag]);
   }
 
   function selectTag(tag)
