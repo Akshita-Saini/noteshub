@@ -48,7 +48,7 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
           value={input.title} 
           onChange={(event) => {setInput({...input,title:event.target.value});}}
           />
-          <button className="take-note-pin" onClick={(event) => setInput({...input,pin:!input.pin})}>PIN</button>
+        <button className="take-note-pin" onClick={(event) => setInput({ ...input, pin: !input.pin })}>{ input.pin?"UNPIN":"PIN"}</button>
         </div>
         <div>
          <textarea

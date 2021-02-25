@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EditNote, NoteFooter } from "./index";
+import { EditNote, Note } from "./index";
 
 function NotesList({ nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions }) {
   
@@ -26,36 +26,11 @@ function NotesList({ nameClass, notesList, setNotesList, altNotesList, setAltNot
         setNotesList(oldList);
     }
 
-    function Note({note})
-    {
-      return (
-        <div className="note" style={{ backgroundColor: `${note.color}` }} onClick={(event) => {
-          if (event.target.localName!=="button" && event.target.localName!=="select")
-          {
-            editNote(note.flag, note)}
-          }
-         }>
-        <h3>{note.title}</h3>
-        <button onClick={() => togglePin(note)}>{note.pin?"UNPIN":"PIN"}</button>
-        <div>{note.note}</div>
-        <NoteFooter
-          note={note}
-          notesList={notesList}
-          setNotesList={setNotesList}
-          colorOptions={colorOptions}
-          tagOptions={tagOptions}
-          deleteNote={deleteNote}
-        />
-    </div>
-      );
-    }
-
     return (
       <div>
         
         {
-          edit.flag &&
-          
+          edit.flag &&       
           <EditNote
             note={edit.note}
             editNote={editNote}
@@ -74,11 +49,29 @@ function NotesList({ nameClass, notesList, setNotesList, altNotesList, setAltNot
             {notesList.map(note => {
               if (tag === "none")
               {
-                return <Note note={ note }/>
+                return <Note
+                  note={note}
+                  notesList={notesList}
+                  setNotesList={setNotesList}
+                  colorOptions={colorOptions}
+                  tagOptions={tagOptions}
+                  deleteNote={deleteNote}
+                  editNote={editNote}
+                  togglePin={togglePin}
+                />
               }
               else if(tag===note.tag)
               {
-                return <Note note={ note }/>
+                return <Note
+                  note={note}
+                  notesList={notesList}
+                  setNotesList={setNotesList}
+                  colorOptions={colorOptions}
+                  tagOptions={tagOptions}
+                  deleteNote={deleteNote}
+                  editNote={editNote}
+                  togglePin={togglePin}
+                />
               }
               return null;
               })}

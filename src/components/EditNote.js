@@ -1,6 +1,6 @@
-import {useState} from "react";
+import { useState } from "react";
 
-function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions})
+function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions, deleteNote})
 { 
     const [input, setInput] = useState({...note});
     function handleSubmit(event){
@@ -31,7 +31,7 @@ function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOpt
           onChange={(event) => setInput({...input,note:event.target.value})}
          />
         </div>
-        <div>
+       <div>
           <select onChange={(event) => setInput({...input,color:event.target.value}) } value={input.color}>
             {
               colorOptions.map(color => {
@@ -45,12 +45,11 @@ function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOpt
                 return <option value={tag}>{tag}</option>
               })
             }
-          </select>
+          </select> 
           <button onClick={(event) => {handleSubmit(event);}}>Update</button>
-           </div>
        </div>
    </div>;
-
+</div>
 }
 
 export {EditNote};

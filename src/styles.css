@@ -72,7 +72,7 @@
   }
 
   .take-note-title{
-    width:90%;
+    width:88%;
   }
 
   .take-note-placeholder {
@@ -80,7 +80,7 @@
   }
 
   .take-note-pin{
-    width:8%
+    width:12%
   }
 
   .take-note-textarea{
@@ -94,7 +94,6 @@
     display:flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    border-bottom: 0.5px solid rgba(220, 220, 220, 0.767);
   }
 
   .notesList-others{
