@@ -15,12 +15,10 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
 
   const [showNote, setShowNote] = useState(false);
 
-  console.log(input);
-
   function handleSubmit(event)
   {
-    event.preventDefault();
-    if(input.title!==""&&input.note!=="")
+    console.log("submitted"+input)
+    if(input.title!=="" || input.note!=="")
     {
       console.log("submitted"+input)
       addNote({...input, date:new Date(),uuid:uuid() });

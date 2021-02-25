@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { EditNote } from "./EditNote";
 
-function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions, editNote}) {
+function NotesList({nameClass, notesList, setNotesList, altNotesList, setAltNotesList, heading, tag, tagOptions, colorOptions}) {
     const [edit, setEdit] = useState({flag:false, note:{}});
     function togglePin(note)
     {
@@ -109,5 +109,5 @@ function ViewNotesList({nameClass, notesList, setNotesList, altNotesList, setAlt
     );
   }
   
-  export { ViewNotesList };
+  export { NotesList };
   

@@ -1,39 +1,79 @@
 import {useState} from "react";
 
-function SideBar({currentTag, selectTag, tagOptions, addNewTag})
+function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
 {
-    const [input, setInput] = useState("");
-    function getColor(currentTag, item)
+  const [input, setInput] = useState("");
+  function getTagColor(selectedTag, currentTag)
+  {
+    if(selectedTag===currentTag)
     {
-        if(currentTag===item)
-        {
-            return "#FEEFC3";
-        }
+      return "#FEEFC3";
     }
-    console.log(tagOptions);
+  }
+  
+  function TagItem({ item })
+  {
+    return (
+      <li
+        style={{ backgroundColor: getTagColor(selectedTag, item.value) }}
+        onClick={() => selectTag(item.value)}>
+        {item.name}
+      </li>
+    );
+  }
+  
+  function NewTag()
+  {
+    return (
+      <div>
+        <input
+          type="text"
+          value={input}
+          onChange={(event) => { setInput(event.target.value) }}
+        />
+        <button onClick={() => {
+          if(input!=="")
+            {
+              addNewTag(input);
+              setInput("");
+          }
+        }}
+        >
+          ADD
+        </button>
+      </div>
+    );
+  }
+
+  function TagList({selectedTag, selectTag, tagOptions, addNewTag})
+  {
+    return (
+      <ul style={{listStyle:"none"}}>
+        <li onClick={() => selectTag("none")} style={{ backgroundColor: getTagColor(selectedTag, "none") }}>
+          Home
+        </li>
+        {
+          tagOptions.map(item => {
+            return (
+              <TagItem key={item.name} item={item} />
+            );
+          })
+        } 
+        <li>
+          <NewTag />
+        </li>
+    </ul>  
+    );
+  }
+
     return (
         <div>
-            <ul style={{listStyle:"none"}}>
-                <li onClick={() => selectTag("none")} style={{backgroundColor:getColor(currentTag,"none")}}>Home</li>
-                {tagOptions.map(item => {return(
-                        <li key={item.name} style={{backgroundColor:getColor(currentTag, item.value)}} onClick={() => selectTag(item.value)}>{item.name}</li>
-                    );
-                })} 
-                <li>
-                    <input type="text" value={input}  onChange={(event)=>
-                        {setInput(event.target.value)}} />
-                    <button onClick={() =>
-                        {
-                            if(input!=="")
-                            {
-                                addNewTag(input);
-                                setInput("");
-                            }
-
-                        }
-                        }>ADD</button>
-                </li>
-            </ul>  
+        <TagList
+          selectedTag={selectedTag}
+          selectTag={selectTag}
+          tagOptions={tagOptions}
+          addNewTag={addNewTag}
+        />
         </div>
     );
 }
