@@ -9,19 +9,21 @@ function Note({ note, notesList, setNotesList, colorOptions, tagOptions, deleteN
         {
             editNote(note.flag, note)  
         }
-    }
-    
+    }   
       return (
         <div className="note" style={{ backgroundColor: `${note.color}` }} onClick={editNoteTrigger}>
-               <NoteTitle note={note} togglePin={ togglePin }/>
-               <NoteBody  note={ note} />
-               <NoteFooter
-                note={note}
-                notesList={notesList}
-                setNotesList={setNotesList}
-                colorOptions={colorOptions}
-                tagOptions={tagOptions}
-                deleteNote={deleteNote}
+              <NoteTitle
+                    note={note}
+                    togglePin={togglePin} />
+              <NoteBody
+                    note={note} />
+              <NoteFooter
+                    note={note}
+                    notesList={notesList}
+                    setNotesList={setNotesList}
+                    colorOptions={colorOptions}
+                    tagOptions={tagOptions}
+                    deleteNote={deleteNote}
             />
       </div>
       );
