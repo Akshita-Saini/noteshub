@@ -2,7 +2,8 @@ import { useState } from "react";
 
 function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions, deleteNote})
 { 
-    const [input, setInput] = useState({...note});
+    const [input, setInput] = useState({ ...note });
+    
     function handleSubmit(event){
         event.preventDefault();
         if(input.title!==""&&input.note!=="")
@@ -11,8 +12,8 @@ function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOpt
           setNotesList([...list,{...input}]);
         }
         editNote(true,{});
-    }
-
+  }
+  
     return <div className="outer-div-modal">
        <div className="inner-div-modal">
        <div >

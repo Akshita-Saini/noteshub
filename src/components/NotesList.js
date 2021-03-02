@@ -15,8 +15,8 @@ function NotesList({ nameClass, notesList, setNotesList, altNotesList, setAltNot
 
     function editNote(flag, note)
     {
-      console.log(note.title + " " + note.note + " edit note console");
-      setEdit({flag:!flag, note:note});
+       console.log(note.title + " " + note.note + " edit note console");
+       setEdit({flag:!flag, note:note});
     }
   
     function deleteNote(note)

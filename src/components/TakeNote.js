@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
 
-
 function TakeNote({addNote, tagOptions, colorOptions}) {
   const [input, setInput] = useState({
     title:"",
@@ -17,39 +16,38 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
 
   function handleSubmit(event)
   {
-    console.log("submitted"+input.tag)
     if(input.title!=="" || input.note!=="")
     {
       addNote({...input, date:new Date(),uuid:uuid() });
     }
     setInput({
-      title:"",
-      note:"",
-      pin:false,
-      date:"",
-      color:"white",
-      tag:"none",
-      uuid:""
+        title:"",
+        note:"",
+        pin:false,
+        date:"",
+        color:"white",
+        tag:"none",
+        uuid:""
     });
   }
 
-  function getDisplay(value)
+  function handleChange(event)
   {
-      if(value) return "block";
-      else return "none";
+    setInput({...input,[event.target.name]:event.target.value});
   }
 
   return (
     <div className="take-note">
-        <div style={{display:getDisplay(showNote)}}>
-          <input  className="take-note-title"
-          type="text"
-          placeholder="Title"
-          value={input.title} 
-          onChange={(event) => {setInput({...input,title:event.target.value});}}
-          />
-        <button className="take-note-pin" onClick={(event) => setInput({ ...input, pin: !input.pin })}>{ input.pin?"UNPIN":"PIN"}</button>
-        </div>
+      <div style={{ display: showNote ? "block" : "none" }}>
+      <input className="take-note-title"
+        type="text"
+        placeholder="Title"
+        value={input.title}
+        name="title"
+        onChange={handleChange}
+        />
+      <button className="take-note-pin" onClick={(event) => setInput({ ...input, pin: !input.pin })}>{ input.pin?"UNPIN":"PIN"}</button>
+      </div>
         <div>
          <textarea
           className="take-note-placeholder"
@@ -57,18 +55,19 @@ function TakeNote({addNote, tagOptions, colorOptions}) {
           placeholder="Take a note..."
           value={input.note}
           onClick={() => setShowNote(true)}
-          onChange={(event) => setInput({...input,note:event.target.value})}
+          name="note"
+          onChange={handleChange}
          />
         </div>
-        <div style={{display:getDisplay(showNote)}}>
-          <select onChange={(event) => setInput({...input,color:event.target.value}) } value={input.color}>
+        <div style={{display:showNote? "block":"none"}}>
+          <select onChange={handleChange} value={input.color} name="color">
             {
               colorOptions.map(color => {
                 return <option value={color.value}>{color.name}</option>
               })
             }
           </select>
-          <select onChange={(event) => setInput({...input,tag:event.target.value}) } value={input.tag}>
+          <select onChange={handleChange} value={input.tag} name="tag">
             {
               tagOptions.map(tag => {
                 return <option value={tag}>{tag}</option>

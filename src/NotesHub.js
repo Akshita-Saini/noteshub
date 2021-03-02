@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { Header, Footer, TakeNote, NotesList, SideBar } from "./components/index.js";
+import "./styles.css";
 
 function NotesHub() {
 
@@ -22,18 +23,15 @@ function NotesHub() {
         {name: "Brown", value: "rgb(230, 201, 168, 0.9)"},
         {name: "Grey", value: "rgb(232, 234, 237, 0.9)"}]
 
-  function addNewTag(newTag)
-  {
+  function addNewTag(newTag){
     setTagOptions([...tagOptions, newTag]);
   }
 
-  function selectTag(tag)
-  {
+  function selectTag(tag){
     setTag(tag);
   }
 
-  function addNote(note)
-  {
+  function addNote(note){
     if(note.pin)
     {
       setPinnedNotesList([note,...pinnedNotesList]);
@@ -44,15 +42,14 @@ function NotesHub() {
   }
 
   return (
-
     <div className="notes-hub">
       <Header />
       <div className="container">
         <SideBar
+          selectedTag={tag}
           selectTag={selectTag}
           tagOptions={tagOptions}
           addNewTag={addNewTag}
-          selectedTag={tag}
         />
         <div className="notes-container">
           <TakeNote
@@ -89,4 +86,4 @@ function NotesHub() {
   );
 }
 
-export { NotesHub };
+export default NotesHub ;

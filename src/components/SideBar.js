@@ -35,8 +35,8 @@ function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
         <button onClick={() => {
           if(input!=="")
             {
-              addNewTag(input);
-              setInput("");
+               addNewTag(input);
+               setInput("");
           }
         }}
         >
@@ -50,18 +50,18 @@ function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
   {
     return (
       <ul style={{listStyle:"none"}}>
-        <li onClick={() => selectTag("none")} style={{ backgroundColor: getTagColor(selectedTag, "none") }}>
-          Home
-        </li>
+            <li onClick={() => selectTag("none")} style={{ backgroundColor: getTagColor(selectedTag, "none") }}>
+                Home
+            </li>
         {
-          tagOptions.map(item => {
+        tagOptions.map(item => {
             return (
-              <TagItem key={item} item={item} />
+                <TagItem key={item} item={item} />
             );
           })
         } 
         <li>
-          <NewTag />
+           <NewTag />
         </li>
     </ul>  
     );
