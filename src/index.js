@@ -1,12 +1,12 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom";
+import { ContextProvider } from "./providers/NotesContextProvider";
 
-import NotesHub  from "./NotesHub";
+import NotesHub from "./NotesHub";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <StrictMode>
+  <ContextProvider>
     <NotesHub />
-  </StrictMode>,
+  </ContextProvider>,
   rootElement
 );

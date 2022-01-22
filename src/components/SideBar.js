@@ -1,82 +1,76 @@
-import {useState} from "react";
+import { useState } from "react";
+import { useNotes } from "../providers/NotesContextProvider";
+import { getTagColor } from "../utils/genericFunctions";
 
-function SideBar({selectedTag, selectTag, tagOptions, addNewTag})
-{
-  const [input, setInput] = useState("");
-
-  function getTagColor(selectedTag, currentTag)
-  {
-    if(selectedTag===currentTag)
-    {
-      return "#FEEFC3";
-    }
-  }
-  
-  function TagItem({ item })
-  {
-    return (
-      <li
-        style={{ backgroundColor: getTagColor(selectedTag, item) }}
-        onClick={() => selectTag(item)}>
-        {item}
-      </li>
-    );
-  }
-  
-  function NewTag()
-  {
-    return (
-      <div>
-        <input
-          type="text"
-          value={input}
-          onChange={(event) => { setInput(event.target.value) }}
-        />
-        <button onClick={() => {
-          if(input!=="")
-            {
-               addNewTag(input);
-               setInput("");
+function NewTag({ newTag, setNewTag }) {
+  const { dispatch } = useNotes();
+  return (
+    <>
+      <input
+        type="text"
+        value={newTag}
+        onChange={(event) => {
+          setNewTag(event.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          if (newTag !== "") {
+            dispatch({ type: "ADD_TAG_OPTION", payload: newTag.toUpperCase() });
+            setNewTag("");
           }
         }}
-        >
-          ADD
-        </button>
-      </div>
-    );
-  }
-
-  function TagList({selectedTag, selectTag, tagOptions, addNewTag})
-  {
-    return (
-      <ul style={{listStyle:"none"}}>
-            <li onClick={() => selectTag("none")} style={{ backgroundColor: getTagColor(selectedTag, "none") }}>
-                Home
-            </li>
-        {
-        tagOptions.map(item => {
-            return (
-                <TagItem key={item} item={item} />
-            );
-          })
-        } 
-        <li>
-           <NewTag />
-        </li>
-    </ul>  
-    );
-  }
-
-    return (
-        <div>
-        <TagList
-          selectedTag={selectedTag}
-          selectTag={selectTag}
-          tagOptions={tagOptions}
-          addNewTag={addNewTag}
-        />
-        </div>
-    );
+      >
+        ADD
+      </button>
+    </>
+  );
 }
 
-export {SideBar};
+function Tag({ tagName }) {
+  const {
+    state: { selectedTag },
+    dispatch,
+  } = useNotes();
+
+  return (
+    <li
+      style={{ backgroundColor: getTagColor(selectedTag, tagName) }}
+      onClick={() =>
+        dispatch({ type: "CHANGE_SELECTED_TAG", payload: tagName })
+      }
+    >
+      {tagName}
+    </li>
+  );
+}
+
+function SideBar() {
+  const [newTag, setNewTag] = useState("");
+
+  const {
+    state: { selectedTag, tagOptions },
+    dispatch,
+  } = useNotes();
+
+  return (
+    <ul style={{ listStyle: "none" }}>
+      <li
+        onClick={() =>
+          dispatch({ type: "CHANGE_SELECTED_TAG", payload: "NONE" })
+        }
+        style={{ backgroundColor: getTagColor(selectedTag, "NONE") }}
+      >
+        HOME
+      </li>
+      {tagOptions.map((tagName) => {
+        return <Tag key={tagName} tagName={tagName} />;
+      })}
+      <li>
+        <NewTag newTag={newTag} setNewTag={setNewTag} />
+      </li>
+    </ul>
+  );
+}
+
+export { SideBar };

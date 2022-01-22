@@ -1,56 +1,88 @@
 import { useState } from "react";
+import { useNotes } from "../providers/NotesContextProvider";
+import { COLORS } from "../utils/Constants";
 
-function EditNote({note, editNote, notesList, setNotesList, colorOptions, tagOptions, deleteNote})
-{ 
-    const [input, setInput] = useState({ ...note });
-    
-    function handleSubmit(event){
-        event.preventDefault();
-        if(input.title!==""&&input.note!=="")
-        {
-          let list = notesList.filter(item => item.uuid !== note.uuid);
-          setNotesList([...list,{...input}]);
-        }
-        editNote(true,{});
+function EditNote({ note, editNote, notesList, setNotesList }) {
+  const [editedNote, setEditedNote] = useState({ ...note });
+
+  const {
+    state: { tagOptions },
+    dispatch,
+  } = useNotes();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (editedNote.title !== "" && editedNote.note !== "") {
+      let list = notesList.filter((item) => item.uuid !== note.uuid);
+      setNotesList([...list, { ...editedNote }]);
+    }
+    editNote(true, {});
   }
-  
-    return <div className="outer-div-modal">
-       <div className="inner-div-modal">
-       <div >
-          <input  className="take-note-title"
-          type="text"
-          value={input.title} 
-          onChange={(event) => {setInput({...input,title:event.target.value});}}
+
+  return (
+    <div className="outer-div-modal">
+      <div className="inner-div-modal">
+        <div>
+          <input
+            className="take-note-title"
+            type="text"
+            value={editedNote.title}
+            onChange={(event) => {
+              setEditedNote({ ...editedNote, title: event.target.value });
+            }}
           />
-          <button className="take-note-pin" onClick={(event) => setInput({...input,pin:!input.pin})}>PIN</button>
+          <button
+            className="take-note-pin"
+            onClick={(event) =>
+              setEditedNote({ ...editedNote, pin: !editedNote.pin })
+            }
+          >
+            PIN
+          </button>
         </div>
         <div>
-         <textarea
-          className="take-note-placeholder"
-          type="text"
-          value={input.note}
-          onChange={(event) => setInput({...input,note:event.target.value})}
-         />
+          <textarea
+            className="take-note-placeholder"
+            type="text"
+            value={editedNote.body}
+            onChange={(event) =>
+              setEditedNote({ ...editedNote, body: event.target.value })
+            }
+          />
         </div>
-       <div>
-          <select onChange={(event) => setInput({...input,color:event.target.value}) } value={input.color}>
-            {
-              colorOptions.map(color => {
-                return <option value={color.value}>{color.name}</option>
-              })
+        <div>
+          <select
+            onChange={(event) =>
+              setEditedNote({ ...editedNote, color: event.target.value })
             }
+            value={editedNote.color}
+          >
+            {COLORS.map((color) => {
+              return <option value={color.value}>{color.name}</option>;
+            })}
           </select>
-          <select onChange={(event) => setInput({...input,tag:event.target.value}) } value={input.tag}>
-            {
-              tagOptions.map(tag => {
-                return <option value={tag}>{tag}</option>
-              })
+          <select
+            onChange={(event) =>
+              setEditedNote({ ...editedNote, tag: event.target.value })
             }
-          </select> 
-          <button onClick={(event) => {handleSubmit(event);}}>Update</button>
-       </div>
-   </div>;
-</div>
+            value={editedNote.tag}
+          >
+            {tagOptions.map((tag) => {
+              return <option value={tag}>{tag}</option>;
+            })}
+          </select>
+          <button
+            onClick={(event) => {
+              handleSubmit(event);
+            }}
+          >
+            Update
+          </button>
+        </div>
+      </div>
+      ;
+    </div>
+  );
 }
 
-export {EditNote};
+export { EditNote };
