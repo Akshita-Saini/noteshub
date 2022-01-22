@@ -2,21 +2,21 @@ import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
 import { COLORS } from "../utils/Constants";
 
-function EditNote({ note, editNote, notesList, setNotesList }) {
-  const [editedNote, setEditedNote] = useState({ ...note });
-
+function EditNote() {
   const {
-    state: { tagOptions },
+    state: { tagOptions, editNote },
     dispatch,
   } = useNotes();
+
+  const [editedNote, setEditedNote] = useState({ ...editNote.editingNote });
 
   function handleSubmit(event) {
     event.preventDefault();
     if (editedNote.title !== "" && editedNote.note !== "") {
-      let list = notesList.filter((item) => item.uuid !== note.uuid);
-      setNotesList([...list, { ...editedNote }]);
+      dispatch({type: "SET_EDITING_NOTE", payload: {...editNote, editingNote:{...editedNote}}});
+      dispatch({type: "EDIT_NOTE", payload: editedNote});
     }
-    editNote(true, {});
+    dispatch({type: "SET_EDITING_NOTE", payload: {...editNote, isOpen:false}});
   }
 
   return (
@@ -37,7 +37,7 @@ function EditNote({ note, editNote, notesList, setNotesList }) {
               setEditedNote({ ...editedNote, pin: !editedNote.pin })
             }
           >
-            PIN
+            { editedNote.pin? "UNPIN": "PIN" }
           </button>
         </div>
         <div>

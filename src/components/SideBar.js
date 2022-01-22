@@ -47,7 +47,6 @@ function Tag({ tagName }) {
 
 function SideBar() {
   const [newTag, setNewTag] = useState("");
-
   const {
     state: { selectedTag, tagOptions },
     dispatch,

@@ -3,16 +3,17 @@ import { v4 as uuid } from "uuid";
 import { useNotes } from "../providers/NotesContextProvider";
 import { COLORS } from "../utils/Constants";
 
+const initialNote = {
+  title: "",
+  body: "",
+  pin: false,
+  date: "",
+  color: "White",
+  tag: "NONE",
+  uuid: null,
+};
+
 function TakeNote() {
-  const initialNote = {
-    title: "",
-    body: "",
-    pin: false,
-    date: "",
-    color: "white",
-    tag: "NONE",
-    uuid: null,
-  };
   const [note, setNote] = useState(initialNote);
   const [showNote, setShowNote] = useState(false);
 

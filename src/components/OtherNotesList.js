@@ -1,66 +1,27 @@
-import { useState } from "react";
 import { EditNote, Note } from "./index";
 import { useNotes } from "../providers/NotesContextProvider";
 
-function OtherNotesList({
-  notesList,
-  setNotesList,
-  altNotesList,
-  setAltNotesList,
-}) {
-  const [edit, setEdit] = useState({ flag: false, note: {} });
-
+function OtherNotesList({}) {
   const {
-    state: { selectedTag },
-    dispatch,
+    state: { selectedTag, otherNotesList, editNote}
   } = useNotes();
-
-  function togglePin(note) {
-    let newList = [{ ...note, pin: !note.pin }, ...altNotesList];
-    let oldList = [...notesList];
-    oldList = oldList.filter((obj) => obj.uuid !== note.uuid);
-    setNotesList(oldList);
-    setAltNotesList(newList);
-  }
-
-  function editNote(flag, note) {
-    console.log(note.title + " " + note.note + " edit note console");
-    setEdit({ flag: !flag, note: note });
-  }
 
   return (
     <div>
-      {edit.flag && (
-        <EditNote
-          note={edit.note}
-          editNote={editNote}
-          setNotesList={setNotesList}
-          notesList={notesList}
-        />
+      {editNote.isOpen && (
+        <EditNote />
       )}
 
-      {notesList.length !== 0 && <h3>OTHERS</h3>}
+      {otherNotesList.length !== 0 && <h3>OTHERS</h3>}
       <div className="notesList-others">
-        {notesList.map((note) => {
-          if (selectedTag === "none") {
+        {otherNotesList.map((note) => {
+          if (selectedTag === "NONE") {
             return (
-              <Note
-                note={note}
-                notesList={notesList}
-                setNotesList={setNotesList}
-                editNote={editNote}
-                togglePin={togglePin}
-              />
+              <Note note={note} key={note.uuid}/>
             );
           } else if (selectedTag === note.tag) {
             return (
-              <Note
-                note={note}
-                notesList={notesList}
-                setNotesList={setNotesList}
-                editNote={editNote}
-                togglePin={togglePin}
-              />
+              <Note note={note}  key={note.uuid}/>
             );
           }
           return null;

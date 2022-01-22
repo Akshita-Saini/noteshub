@@ -3,6 +3,7 @@ const initialState = {
   otherNotesList: [],
   tagOptions: ["URGENT", "IMP", "TO-DO"],
   selectedTag: "NONE",
+  editNote:{ isOpen:false, editingNote:{} }
 };
 
 function reducer(state, action) {
@@ -12,6 +13,7 @@ function reducer(state, action) {
     case "ADD_TAG_OPTION":
       return { ...state, tagOptions: [...state.tagOptions, action.payload] };
     case "ADD_NOTE":
+      console.log("add note here");
       return action.payload.pin
         ? {
             ...state,
@@ -19,28 +21,77 @@ function reducer(state, action) {
           }
         : {
             ...state,
-            pinnedNotesList: [action.payload, ...state.otherNotesList],
+            otherNotesList: [action.payload, ...state.otherNotesList],
           };
     case "DELETE_NOTE":
+      console.log("delete here");
       return action.payload.pin
         ? {
             ...state,
-            pinnedNotesList: state.pinnedNotesList.filter(
-              (note) => note.uuid !== action.payload.uuid
-            ),
+            pinnedNotesList: [...state.pinnedNotesList.filter((note) => note.uuid !== action.payload.uuid)]
           }
         : {
             ...state,
-            otherNotesList: state.otherNotesList.filter(
-              (note) => note.uuid !== action.payload.uuid
-            ),
+            otherNotesList: [...state.otherNotesList.filter((note) => note.uuid !== action.payload.uuid)]
           };
-    case "EDIT_NOTE":
-      return action.payload.pin ? {} : {};
     case "TOGGLE_NOTE_PIN":
-      return action.payload.pin ? {} : {};
+      console.log("toggle pin here");
+      return action.payload.pin ? 
+      {
+        ...state, 
+        pinnedNotesList: [...state.pinnedNotesList.filter((note) => note.uuid!==action.payload.uuid)],
+        otherNotesList: [{...action.payload, pin:!action.payload.pin}, ...state.otherNotesList]
+      } : {
+        ...state,
+        otherNotesList: [...state.otherNotesList.filter((note) => note.uuid!==action.payload.uuid)],
+        pinnedNotesList: [{...action.payload, pin:!action.payload.pin}, ...state.pinnedNotesList]
+      };
+    case "EDIT_NOTE_PROPERTY":
+      console.log("edit note property here");
+      return action.payload.pin ? 
+      {
+        ...state, 
+        pinnedNotesList: [...state.pinnedNotesList.map((note) => {
+          if(note.uuid === action.payload.uuid){
+            return {...note, [action.payload.name] : action.payload.value}
+          }
+          return note;
+        })]
+      }
+      :
+      {
+        ...state,
+        otherNotesList: [...state.otherNotesList.map((note) => {
+          if(note.uuid === action.payload.uuid){
+            return {...note, [action.payload.name] : action.payload.value}
+          }
+          return note;
+        })]
+      };
+    case "EDIT_NOTE":
+      console.log("edit note here");
+      return action.payload.pin ? 
+      {
+        ...state, 
+        pinnedNotesList: [...state.pinnedNotesList.map((note) => {
+          return note.uuid === action.payload.uuid? action.payload: note;
+        })]
+      }
+      :
+      {
+        ...state,
+        otherNotesList: [...state.otherNotesList.map((note) => {
+          return note.uuid === action.payload.uuid? action.payload: note;
+        })]
+      };
+    case "SET_EDITING_NOTE":
+      console.log("edit note here");
+      return {
+        ...state,
+        editNote:{isOpen:true, editingNote: action.payload}
+      }
     default:
-      throw new Error();
+      return state;
   }
 }
 
