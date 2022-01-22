@@ -4,19 +4,17 @@ import { COLORS } from "../utils/Constants";
 
 function EditNote() {
   const {
-    state: { tagOptions, editNote },
+    state: { tagOptions , editNote },
     dispatch,
   } = useNotes();
 
-  const [editedNote, setEditedNote] = useState({ ...editNote.editingNote });
+  const [editedNote, setEditedNote] = useState({...editNote.editingNote});
 
   function handleSubmit(event) {
     event.preventDefault();
     if (editedNote.title !== "" && editedNote.note !== "") {
-      dispatch({type: "SET_EDITING_NOTE", payload: {...editNote, editingNote:{...editedNote}}});
       dispatch({type: "EDIT_NOTE", payload: editedNote});
     }
-    dispatch({type: "SET_EDITING_NOTE", payload: {...editNote, isOpen:false}});
   }
 
   return (
@@ -34,7 +32,10 @@ function EditNote() {
           <button
             className="take-note-pin"
             onClick={(event) =>
-              setEditedNote({ ...editedNote, pin: !editedNote.pin })
+              {
+                dispatch({type:"TOGGLE_NOTE_PIN", payload:editedNote});
+                setEditedNote({ ...editedNote, pin: !editedNote.pin });
+              }
             }
           >
             { editedNote.pin? "UNPIN": "PIN" }

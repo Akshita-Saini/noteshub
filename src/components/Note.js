@@ -9,14 +9,16 @@ function Note({ note }) {
       event.target.localName !== "button" &&
       event.target.localName !== "select"
     ){
-      dispatch({type: "SET_EDITING_NOTE", payload: { isOpen:true, editingNote: note }});
+      console.log("firing edit note caller");
+      console.log({note});
+      dispatch({type: "SET_EDIT_NOTE", payload: { isOpen:true, editingNote: note }});
     }
   }
 
   function ColorOptions({note}) {
     return (
       <select
-        onChange={(event) => { console.log({note}); dispatch({type:"EDIT_NOTE", payload:{pin:note.pin, uuid:note.uuid, name:"color", value:event.target.value}}) }}
+        onChange={(event) => { console.log({note}); dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"color", value:event.target.value}}) }}
         value={note.color}
       >
         {COLORS.map((color) => {
@@ -29,7 +31,7 @@ function Note({ note }) {
   function TagOptions({note}) {
     return (
       <select
-        onChange={(event) => {  console.log("I'm firing changeTag"); dispatch({type:"EDIT_NOTE", payload:{pin:note.pin, uuid:note.uuid, name:"tag", value:event.target.value}}) }}
+        onChange={(event) => {  console.log("I'm firing changeTag"); dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"tag", value:event.target.value}}) }}
         value={note.tag}
       >
         {tagOptions.map((tag) => {
@@ -44,6 +46,10 @@ function Note({ note }) {
       className="note"
       style={{ backgroundColor: `${note.color}` }}
       onClick={(event) => editNoteTrigger(event, note)}>
+      <div>
+          <h3>{note.title}</h3>
+          <button onClick={() => {console.log("toggle pin onclick fires");  dispatch({type:"TOGGLE_NOTE_PIN", payload:note})}}>{note.pin?"UNPIN":"PIN"}</button>
+      </div>
       <div>{note.body}</div>
       <div>
         <ColorOptions note={note}/>
@@ -51,10 +57,6 @@ function Note({ note }) {
         <button onClick={() => dispatch({ type: "DELETE_NOTE", payload: note })}>
           DELETE
         </button>
-      </div>
-      <div>
-          <h3>{note.title}</h3>
-          <button onClick={() => {console.log("toggle pin onclick fires");  dispatch({type:"TOGGLE_NOTE_PIN", payload:note})}}>{note.pin?"UNPIN":"PIN"}</button>
       </div>
     </div>
   );

@@ -69,10 +69,11 @@ function reducer(state, action) {
         })]
       };
     case "EDIT_NOTE":
-      console.log("edit note here");
+      console.log("edit note here", action.payload);
       return action.payload.pin ? 
       {
         ...state, 
+        editNote:{ isOpen:false, editingNote:{}},
         pinnedNotesList: [...state.pinnedNotesList.map((note) => {
           return note.uuid === action.payload.uuid? action.payload: note;
         })]
@@ -80,15 +81,16 @@ function reducer(state, action) {
       :
       {
         ...state,
+        editNote:{ isOpen:false, editingNote:{}},
         otherNotesList: [...state.otherNotesList.map((note) => {
           return note.uuid === action.payload.uuid? action.payload: note;
         })]
       };
-    case "SET_EDITING_NOTE":
+    case "SET_EDIT_NOTE":
       console.log("edit note here");
       return {
         ...state,
-        editNote:{isOpen:true, editingNote: action.payload}
+        editNote: action.payload
       }
     default:
       return state;
