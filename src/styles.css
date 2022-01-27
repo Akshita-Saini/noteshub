@@ -405,10 +405,12 @@ ul {
 
 .edit-note-textarea {
   width: 100%;
+  height: 100%;
   border: none;
   outline: none;
   background-color: inherit;
   font-size: 1.05rem;
+  font-family: var(--font-family);
 }
 
 .edit-note-textarea::placeholder {

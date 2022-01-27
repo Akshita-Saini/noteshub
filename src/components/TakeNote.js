@@ -39,7 +39,6 @@ function TakeNote() {
   }
 
   function handleColorChange(color){
-    console.log({...note, color:color});
     setNote({...note, color:color});
   }
 

@@ -20,7 +20,6 @@ function EditNote() {
 
   
   function handleColorChange(color){
-    console.log({...editedNote, color:color});
     setEditedNote({...editedNote, color:color});
   }
 

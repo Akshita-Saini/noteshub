@@ -7,8 +7,6 @@ function Note({ note }) {
   const [isColorPaletteOpen, toggleColorPalette]=useState(false);
 
   function editNoteTrigger(event, note) {
-    console.log({event})
-    console.log(event.target.parentElement)
     if (
       event.target.localName !== "button" &&
       event.target.localName !== "select" &&
@@ -26,7 +24,7 @@ function Note({ note }) {
   function ColorOptions({note}) {
     return (
       <select
-        onChange={(event) => { console.log({note}); dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"color", value:event.target.value}}) }}
+        onChange={(event) => { dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"color", value:event.target.value}}) }}
         value={note.color}
       >
         {COLORS.map((color) => {
@@ -41,7 +39,7 @@ function Note({ note }) {
     return (
       <select 
         className="note-select"
-        onChange={(event) => {  console.log("I'm firing changeTag"); dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"tag", value:event.target.value}}) }}
+        onChange={(event) => { dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"tag", value:event.target.value}}) }}
         value={note.tag}
       >
         {tagOptions.map((tag) => {
@@ -52,7 +50,6 @@ function Note({ note }) {
   }
   
   function handleColorChange(color){
-    console.log({...note, color:color});
     dispatch({type:"EDIT_NOTE_PROPERTY",  payload:{uuid:note.uuid, name:'color', value:color, pin:note.pin}})
   }
 
