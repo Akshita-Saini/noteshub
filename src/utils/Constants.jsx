@@ -10,7 +10,7 @@ const COLORS = [
   { name: "Purple", value: "#D7AEFA" },
   { name: "Pink", value: "#FCCFE7" },
   { name: "Brown", value: "#E5C9A9" },
-  { name: "Grey", value: "#E7EAED" },
+  { name: "Grey", value: "#E8EAED" },
 ];
 
 export { COLORS };
