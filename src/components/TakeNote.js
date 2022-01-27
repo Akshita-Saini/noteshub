@@ -60,12 +60,12 @@ function TakeNote() {
           name="title"
           onChange={handleChange}
         />
-        <div
+        <button
           className="take-note-pin"
           onClick={() => setNote({ ...note, pin: !note.pin })}
         >
           {note.pin ? <svg className="pin-fill" width="1em" height="1em" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z" fill="currentColor"></path></svg> : <svg className="pin-outline" width="1em" height="1em" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2m-7.2 2l1.2-1.2V4h4v8.8l1.2 1.2H8.8z" fill="currentColor"></path></svg>}
-        </div>
+        </button>
       </div>
       <textarea
         className="take-note-textarea"

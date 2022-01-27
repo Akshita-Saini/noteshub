@@ -1,7 +1,7 @@
 const initialState = {
   pinnedNotesList: [],
   otherNotesList: [],
-  tagOptions: ["Urgent", "Important", "Todo"],
+  tagOptions: ["Urgent", "Todo"],
   selectedTag: "NONE",
   editNote:{ isOpen:false, editingNote:{} }
 };
