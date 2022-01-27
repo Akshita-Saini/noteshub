@@ -1,7 +1,7 @@
 const initialState = {
   pinnedNotesList: [],
   otherNotesList: [],
-  tagOptions: ["URGENT", "IMP", "TO-DO"],
+  tagOptions: ["Urgent", "Important", "Todo"],
   selectedTag: "NONE",
   editNote:{ isOpen:false, editingNote:{} }
 };
@@ -13,7 +13,6 @@ function reducer(state, action) {
     case "ADD_TAG_OPTION":
       return { ...state, tagOptions: [...state.tagOptions, action.payload] };
     case "ADD_NOTE":
-      console.log("add note here");
       return action.payload.pin
         ? {
             ...state,
@@ -24,7 +23,6 @@ function reducer(state, action) {
             otherNotesList: [action.payload, ...state.otherNotesList],
           };
     case "DELETE_NOTE":
-      console.log("delete here");
       return action.payload.pin
         ? {
             ...state,
@@ -35,7 +33,6 @@ function reducer(state, action) {
             otherNotesList: [...state.otherNotesList.filter((note) => note.uuid !== action.payload.uuid)]
           };
     case "TOGGLE_NOTE_PIN":
-      console.log("toggle pin here");
       return action.payload.pin ? 
       {
         ...state, 
@@ -47,7 +44,6 @@ function reducer(state, action) {
         pinnedNotesList: [{...action.payload, pin:!action.payload.pin}, ...state.pinnedNotesList]
       };
     case "EDIT_NOTE_PROPERTY":
-      console.log("edit note property here");
       return action.payload.pin ? 
       {
         ...state, 
@@ -69,7 +65,6 @@ function reducer(state, action) {
         })]
       };
     case "EDIT_NOTE":
-      console.log("edit note here", action.payload);
       return action.payload.pin ? 
       {
         ...state, 
@@ -87,7 +82,6 @@ function reducer(state, action) {
         })]
       };
     case "SET_EDIT_NOTE":
-      console.log("edit note here");
       return {
         ...state,
         editNote: action.payload

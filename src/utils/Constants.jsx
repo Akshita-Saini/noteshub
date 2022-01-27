@@ -1,15 +1,16 @@
 const COLORS = [
-  { name: "Orange", value: "rgb(251, 188, 4, 0.5)" },
-  { name: "Red", value: "rgb(242, 139, 130, 0.9)" },
-  { name: "Yellow", value: "rgb(255, 244, 117, 0.9)" },
-  { name: "Green", value: "rgb(204, 255, 144, 0.9)" },
-  { name: "Teal", value: "rgb(167, 255, 235, 0.9)" },
-  { name: "Blue", value: "rgb(203, 240, 248, 0.9)" },
-  { name: "Dark Blue", value: "rgb(174, 203, 250, 0.9)" },
-  { name: "Purple", value: "rgb(215, 174, 251, 0.9)" },
-  { name: "Pink", value: "rgb(253, 207, 232, 0.9)" },
-  { name: "Brown", value: "rgb(230, 201, 168, 0.9)" },
-  { name: "Grey", value: "rgb(232, 234, 237, 0.9)" },
+  { name: "White", value: "#fff"},
+  { name: "Orange", value: "#FDDD81" },
+  { name: "Red", value: "#F3968E" },
+  { name: "Yellow", value: "#FFF583" },
+  { name: "Green", value: "#D1FF9B" },
+  { name: "Teal", value: "#B0FFED" },
+  { name: "Blue", value: "#D0F1F9" },
+  { name: "Dark Blue", value: "#B6D0FA" },
+  { name: "Purple", value: "#D7AEFA" },
+  { name: "Pink", value: "#FCCFE7" },
+  { name: "Brown", value: "#E5C9A9" },
+  { name: "Grey", value: "#E7EAED" },
 ];
 
 export { COLORS };
