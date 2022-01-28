@@ -6,13 +6,20 @@ function OtherNotesList({}) {
     state: { selectedTag, otherNotesList, editNote}
   } = useNotes();
 
+  const filteredNotesList = otherNotesList.filter((note) => {
+    if(selectedTag === "NONE"){
+      return <Note note={note}/>;
+    }else if(selectedTag === note.tag){
+      return <Note note={note}/>;
+    }
+  })
+
   return (
     <div>
       {editNote.isOpen && (
         <EditNote />
       )}
-
-      {otherNotesList.length !== 0 && <h3>OTHERS</h3>}
+      {filteredNotesList.length !== 0 && <h3>OTHERS</h3>}
       <div className="notesList-others">
         {otherNotesList.map((note) => {
           if (selectedTag === "NONE") {

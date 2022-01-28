@@ -6,13 +6,22 @@ function PinnedNotesList() {
     state: { selectedTag, pinnedNotesList, editNote}
   } = useNotes();
 
+  const filteredNotesList = pinnedNotesList.filter( (note) => {
+    if(selectedTag === "NONE"){
+      return <Note note={note}/>;
+    }else if(selectedTag === note.tag){
+      return <Note note={note}/>;
+    }
+
+  })
+  
   return (
     <div>
       {editNote.isOpen && (
         <EditNote />
       )}
 
-      {pinnedNotesList.length !== 0 && <h3>PINNED</h3>}
+      {filteredNotesList.length !== 0 && <h3>PINNED</h3>}
       <div className="notesList-pinned">
         {pinnedNotesList.map((note) => {
           if (selectedTag === "NONE") {
