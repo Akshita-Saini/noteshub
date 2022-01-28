@@ -24,7 +24,7 @@ function TakeNote() {
   } = useNotes();
 
   function handleSubmit(event) {
-    if (note.title !== "" || note.body !== "") {
+    if (note.title.trim() !== "" || note.body.trim() !== "") {
       dispatch({
         type: "ADD_NOTE",
         payload: { ...note, date: new Date(), uuid: uuid() },

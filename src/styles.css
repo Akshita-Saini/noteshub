@@ -28,15 +28,22 @@ ul {
 .notes-hub {
   height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
 .notes-container {
-  transform: translateX(15rem);
-  padding: 2rem;
+  padding: 6rem 0 0 15rem;
 }
 
 /* Header */
 .header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  background-color: #fff;
   text-align: center;
   font-size: 30px;
   border-bottom: 0.5px solid rgb(173, 167, 167);
@@ -65,6 +72,7 @@ ul {
 .sidebar {
   width: 15rem;
   position: fixed;
+  top: 4.1rem;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -143,10 +151,13 @@ ul {
   font-size: 1.05rem;
   background-color: inherit;
   color: var(--text-color-slightly-dark);
+  font-weight: 600;
 }
 
 .take-note-title::placeholder {
   color: var(--text-color-slightly-dark);
+  font-family: var(--font-family);
+  font-weight: 500;
 }
 
 .take-note-title:focus,
@@ -294,6 +305,7 @@ ul {
   font-size: 1.05rem;
   background-color: inherit;
   color: var(--text-color-slightly-dark);
+  font-family: var(--font-family);
 }
 
 .note-pin {
@@ -355,17 +367,18 @@ ul {
 
 /*Edit Note */
 .outer-div-modal {
-  position: fixed;
+  position: absolute;
   height: 100vh;
   width: 100vw;
   top: 0;
   left: 0;
-  background-color: rgb(58, 58, 58, 0.5);
+  bottom: 0;
+  right: 0;
+
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.678);
-  transform: translate(-15rem, -4rem);
-  z-index: 2;
+  z-index: 100000;
 }
 
 .inner-div-modal {
@@ -394,6 +407,8 @@ ul {
   font-size: 1.05rem;
   background-color: inherit;
   color: var(--text-color-slightly-dark);
+  font-weight: 600;
+  font-family: var(--font-family);
 }
 
 .edit-note-pin {
