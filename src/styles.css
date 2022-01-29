@@ -273,6 +273,7 @@ ul {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .notesList-others {
@@ -280,9 +281,11 @@ ul {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .note {
+  border: 1px solid #7c7c7c77;
   padding: 1rem;
   width: 200px;
   min-height: 200px;
