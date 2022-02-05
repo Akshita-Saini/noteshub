@@ -79,6 +79,7 @@ ul {
 }
 
 .list {
+  list-style: none;
   display: flex;
   flex-direction: column;
 }

@@ -12,12 +12,12 @@ function NotesHub() {
   return (
     <div className="notes-hub">
       <Header />
-        <SideBar />
-        <div className="notes-container">
-          <TakeNote />
-          <PinnedNotesList />
-          <OtherNotesList />
-        </div>  
+      <SideBar />
+      <div className="notes-container">
+        <TakeNote />
+        <PinnedNotesList />
+        <OtherNotesList />
+      </div>  
       <Footer />
     </div>
   );
