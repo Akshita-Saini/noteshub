@@ -6,7 +6,7 @@ import { Note } from "./Note";
 import { Tag } from "./Tag";
 import { NewTag } from "./NewTag";
 import { NotesList } from "./NotesList";
-
+import { ColorOptions } from "./ColorOptions";
 
 export {
   Header,
@@ -16,5 +16,6 @@ export {
   Note,
   Tag, 
   NewTag,
-  NotesList
+  NotesList,
+  ColorOptions
 };

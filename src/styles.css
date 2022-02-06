@@ -181,13 +181,6 @@ ul {
   font-size: 1.05rem;
 }
 
-.take-note-pin {
-  font-size: 1.5rem;
-  border: none;
-  background-color: inherit;
-  padding: 0;
-}
-
 .take-note-footer {
   width: 100%;
   display: flex;
@@ -208,16 +201,16 @@ ul {
 .color-palette-icon {
   width: 1.5rem;
   height: 1.5rem;
+  color: #2c2e30;
 }
 
-.color-box,
-.note-color-box {
+.color-box {
   position: absolute;
   bottom: 0;
   left: 0;
   transform: translate(-25%, 80%);
   z-index: 1;
-  width: 30%;
+  width: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -270,15 +263,7 @@ ul {
 
 /*NotesLists*/
 
-.notesList-pinned {
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.notesList-others {
+.notesList {
   padding: 1rem;
   display: flex;
   justify-content: flex-start;
@@ -318,6 +303,7 @@ ul {
   border: none;
   background-color: inherit;
   padding: 0;
+  color: #2c2e30;
 }
 
 .note-body {
@@ -330,11 +316,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.note-color-box {
-  width: 50%;
-  transform: translate(-25%, 82%);
 }
 
 .note-close-btn {
@@ -414,13 +395,6 @@ ul {
   color: var(--text-color-slightly-dark);
   font-weight: 600;
   font-family: var(--font-family);
-}
-
-.edit-note-pin {
-  font-size: 1.5rem;
-  border: none;
-  background-color: inherit;
-  padding: 0;
 }
 
 .edit-note-textarea {

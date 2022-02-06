@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useNotes } from "../providers/NotesContextProvider";
-import { COLORS, initialNote } from "../utils/Constants";
-import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon } from "../images/index";
+import { initialNote } from "../utils/Constants";
+import { PinFillIcon, PinOutlineIcon } from "../images/index";
 import { takeNoteStyle, takeNoteTextareaStyle } from "../utils/styles.jsx";
+import { ColorOptions } from "./ColorOptions";
 
 function TakeNote() {
   const [note, setNote] = useState(initialNote);
   const [showNote, setShowNote] = useState(false);
-  const [isColorPaletteOpen, setIsColorPaletteOpen ] = useState(false);
 
   const {
     state: { tagOptions },
     dispatch,
   } = useNotes();
-
-  function toggleColorPalette(){
-    setIsColorPaletteOpen(isColorPaletteOpen => !isColorPaletteOpen);
-  }
 
   function handleSubmit() {
     if (note.title.trim() !== "" || note.body.trim() !== "") {
@@ -34,10 +30,6 @@ function TakeNote() {
     setNote({ ...note, [event.target.name]: event.target.value.trim() });
   }
 
-  function handleColorChange(color){
-    setNote({...note, color:color});
-  }
-
   return (
     <div className="take-note" 
       style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: `${note.color}` } }>
@@ -51,7 +43,7 @@ function TakeNote() {
           onChange={ handleChange }
         />
         <button
-          className="take-note-pin"
+          className="note-pin"
           onClick={() => setNote({ ...note, pin: !note.pin })}
         >
           {note.pin ? <PinFillIcon className="pin-fill"/>  : <PinOutlineIcon className="pin-outline"/>}
@@ -68,19 +60,7 @@ function TakeNote() {
         style={ showNote? { fontSize: "1.05rem" }: { ...takeNoteTextareaStyle } }
       />
       <div className="take-note-footer" style={{ display: showNote ? "flex" : "none" }}>
-        <div onMouseEnter={ toggleColorPalette }>
-          <ColorPaletteIcon className="color-palette-icon" />
-          {
-            isColorPaletteOpen &&    
-              <div className="color-box">
-               {
-                 COLORS.map(color => {
-                   return <div className="color" style={{ backgroundColor: `${color.value}` }} onClick={() => handleColorChange(color.value)}></div>;
-                 })
-               }
-              </div>
-          }
-        </div>
+        <ColorOptions note={note} setNote={setNote} />
         <select className="tag-select" onChange={ handleChange } value={ note.tag } name="tag">
             {
               tagOptions.map((tag) => {

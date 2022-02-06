@@ -2,7 +2,7 @@ import { EditNote, Note } from "./index";
 import { useNotes } from "../providers/NotesContextProvider";
 import { getFilteredNotesList } from "../utils/genericFunctions";
 
-function NotesList({ listName, listClass, notesList}) {
+function NotesList({ listName, notesList}) {
   const {
     state: { selectedTag, editNote}
   } = useNotes();
@@ -15,7 +15,7 @@ function NotesList({ listName, listClass, notesList}) {
       {  filteredNotesList.length !== 0 && 
         <> 
           <h3> { listName } </h3>
-          <div className={ listClass }>
+          <div className = "notesList">
             {     
               filteredNotesList.map( note => <Note note={note}  key={note.uuid} />)
             }

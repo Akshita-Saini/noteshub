@@ -16,8 +16,8 @@ function NotesHub() {
       <SideBar />
       <div className="notes-container">
         <TakeNote />
-        <NotesList  listName="PINNED" listClass="notesList-pinned" notesList={pinnedNotesList}/>
-        <NotesList  listName="OTHER" listClass="notesList-others" notesList={otherNotesList}/>
+        <NotesList  listName="PINNED"  notesList={pinnedNotesList}/>
+        <NotesList  listName="OTHER"  notesList={otherNotesList}/>
       </div>  
     </div>
   );

@@ -1,16 +1,9 @@
-import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
-import { COLORS } from "../utils/Constants";
-import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon, DeleteIcon } from "../images/index";
+import { PinFillIcon, PinOutlineIcon, DeleteIcon } from "../images/index";
+import { ColorOptions } from "./ColorOptions";
 
 function Note({ note }) {
   const { dispatch, state: { tagOptions } } = useNotes();
-  const [isColorPaletteOpen, setIsColorPaletteOpen] = useState(false);
-
-
-  function toggleColorPalette(){
-    setIsColorPaletteOpen(isColorPaletteOpen => !isColorPaletteOpen);
-  }
 
   function editNoteTrigger(event, note) {
     if (
@@ -26,11 +19,6 @@ function Note({ note }) {
       dispatch({ type: "SET_NOTE_TO_EDIT", payload: { isOpen: true, note: note } });
     }
   }
-  
-  function handleColorChange(color){
-    dispatch({ type:"EDIT_NOTE_COLOR_OR_TAG",  payload: {uuid: note.uuid, name: 'color', value: color, pin: note.pin} })
-  }
-
 
   return (
     <div
@@ -45,19 +33,7 @@ function Note({ note }) {
       </div>
       <p className="note-body"> { note.body } </p>
       <div className="note-footer">
-        <div localName="select" onMouseEnter={ toggleColorPalette }>
-         <ColorPaletteIcon className="color-box-icon"/>
-          {
-            isColorPaletteOpen &&  
-              <div className="note-color-box">
-               {
-                 COLORS.map(color => {
-                   return <div className="color" style={{ backgroundColor: `${color.value}` }} onClick={() => handleColorChange(color.value)}></div>;
-                 })
-               }
-              </div>
-          }
-        </div>
+        <ColorOptions note={note} />
         <select 
           className="note-select"
           onChange={(event) => { dispatch({ type: "EDIT_NOTE_COLOR_OR_TAG", payload: { pin: note.pin, uuid: note.uuid, name: "tag", value: event.target.value } })}}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
-import { COLORS } from "../utils/Constants";
-import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon } from "../images/index";
+import { PinFillIcon, PinOutlineIcon } from "../images/index";
+import { ColorOptions } from "./ColorOptions";
 
 function EditNote() {
   const {
@@ -10,8 +10,7 @@ function EditNote() {
   } = useNotes();
 
   const [note, setNote] = useState({...editNote.note});
-  const [isColorPaletteOpen, setIsColorPaletteOpen] = useState(false);
-
+ 
   function handleSubmit(event) {
     event.preventDefault();
     if (note.title.trim() !== "" && note.body.trim() !== "") {
@@ -21,14 +20,6 @@ function EditNote() {
 
   function handleChange(event) {
     setNote({ ...note, [event.target.name]: event.target.value.trim() });
-  }
-
-  function toggleColorPalette(){
-    setIsColorPaletteOpen(isColorPaletteOpen => !isColorPaletteOpen);
-  }
-  
-  function handleColorChange(color){
-    setNote({...note, color:color});
   }
 
   function handlePinChange(){
@@ -48,7 +39,7 @@ function EditNote() {
             onChange={ handleChange }
           />
           <button
-            className="edit-note-pin"
+            className="note-pin"
             onClick={ handlePinChange }
           >
             { note.pin? <PinFillIcon className="pin-fill"/>  : <PinOutlineIcon className="pin-outline"/> }
@@ -62,19 +53,7 @@ function EditNote() {
             onChange={ handleChange }
         />
         <div className="edit-note-footer">
-          <div onMouseEnter={ toggleColorPalette }>
-          <ColorPaletteIcon className="color-palette-icon" />
-            {
-              isColorPaletteOpen &&    
-                <div className="note-color-box">
-                {
-                  COLORS.map(color => {
-                    return <div className="color" style={{ backgroundColor: `${color.value}` }} onClick={() => handleColorChange(color.value)}></div>;
-                  })
-                }
-                </div>
-            }
-          </div>
+          <ColorOptions note={note} setNote={setNote} />
           <select
             className="tag-select"
             name="tag"
