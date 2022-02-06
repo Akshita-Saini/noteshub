@@ -21,7 +21,7 @@ const initialNote = {
   pin: false,
   date: "",
   color: "#fff",
-  tag: "NONE",
+  tag: "None",
   uuid: null,
 };
 
@@ -31,7 +31,7 @@ const initialState = {
     color: "#D1FF9B",
     date: "Thu Jan 27 2022 21:14:40 GMT+0530 (India Standard Time)",
     pin: true,
-    tag: "NONE",
+    tag: "None",
     title: "6 Books to Read in 2022",
     uuid: uuid()
   }
@@ -47,8 +47,8 @@ const initialState = {
       uuid: uuid()
     }
   ],
-  tagOptions: ["Urgent", "Todo"],
-  selectedTag: "NONE",
+  tagOptions: ["None", "Urgent", "Todo"],
+  selectedTag: "None",
   editNote: { isOpen:false, editingNote:{} }
 };
 

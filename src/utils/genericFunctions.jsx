@@ -5,7 +5,7 @@ function getTagColor(selectedTag, currentTag) {
 }
 
 function getFilteredNotesList(notesList, selectedTag){
-  return notesList.filter((note) => selectedTag === "NONE" || selectedTag === note.tag )
+  return notesList.filter((note) => selectedTag === "None" || selectedTag === note.tag )
 }
 
 export { getTagColor, getFilteredNotesList };

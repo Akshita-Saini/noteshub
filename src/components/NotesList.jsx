@@ -16,7 +16,7 @@ function NotesList({ listName, listClass, notesList}) {
         <> 
           <h3> { listName } </h3>
           <div className={ listClass }>
-            {
+            {     
               filteredNotesList.map( note => <Note note={note}  key={note.uuid} />)
             }
           </div>
