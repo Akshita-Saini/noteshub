@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useNotes } from "../providers/NotesContextProvider";
 import { COLORS, initialNote } from "../utils/Constants";
-import { ReactComponent as PinFill } from "../images/pin-fill.svg";
-import { ReactComponent as PinOutline } from "../images/pin-outline.svg";
-import { ReactComponent as ColorPaletteIcon } from "../images/color-palette-icon.svg";
+import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon } from "../images/index";
 import { takeNoteStyle, takeNoteTextareaStyle } from "../utils/styles.jsx";
 
 function TakeNote() {
   const [note, setNote] = useState(initialNote);
   const [showNote, setShowNote] = useState(false);
-  const [isColorPaletteOpen, setIsColorPaletteOpen ]=useState(false);
+  const [isColorPaletteOpen, setIsColorPaletteOpen ] = useState(false);
 
   const {
     state: { tagOptions },
@@ -56,7 +54,7 @@ function TakeNote() {
           className="take-note-pin"
           onClick={() => setNote({ ...note, pin: !note.pin })}
         >
-          {note.pin ? <PinFill className="pin-fill"/>  : <PinOutline className="pin-outline"/>}
+          {note.pin ? <PinFillIcon className="pin-fill"/>  : <PinOutlineIcon className="pin-outline"/>}
         </button>
       </div>
       <textarea

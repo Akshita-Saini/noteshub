@@ -49,7 +49,7 @@ const initialState = {
   ],
   tagOptions: ["None", "Urgent", "Todo"],
   selectedTag: "None",
-  editNote: { isOpen:false, editingNote:{} }
+  editNote: { isOpen:false, note:{} }
 };
 
 export { COLORS, initialNote, initialState };

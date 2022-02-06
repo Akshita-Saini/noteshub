@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
 import { COLORS } from "../utils/Constants";
-import { ReactComponent as PinFill } from "../images/pin-fill.svg";
-import { ReactComponent as PinOutline } from "../images/pin-outline.svg";
-import { ReactComponent as ColorPaletteIcon } from "../images/color-palette-icon.svg";
-import { ReactComponent as DeleteIcon } from "../images/delete-icon.svg";
+import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon, DeleteIcon } from "../images/index";
 
 function Note({ note }) {
   const { dispatch, state: { tagOptions } } = useNotes();
@@ -26,7 +23,7 @@ function Note({ note }) {
       event.target.className !== 'color' &&
       event.target.className !== 'color-box-icon'
     ){
-      dispatch({ type: "SET_EDIT_NOTE", payload: { isOpen: true, editingNote: note } });
+      dispatch({ type: "SET_NOTE_TO_EDIT", payload: { isOpen: true, note: note } });
     }
   }
   
@@ -43,7 +40,7 @@ function Note({ note }) {
       <div className="note-header">
           <h3 className="note-title"> { note.title } </h3>
           <button className="note-pin" onClick={() => { dispatch({ type: "TOGGLE_NOTE_PIN", payload: note }) }}>
-          { note.pin ? <PinFill className="pin-fill"/>  : <PinOutline className="pin-outline"/> }
+          { note.pin ? <PinFillIcon className="pin-fill"/>  : <PinOutlineIcon className="pin-outline"/> }
           </button>
       </div>
       <p className="note-body"> { note.body } </p>

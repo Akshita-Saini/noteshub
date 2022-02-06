@@ -62,7 +62,7 @@ function reducer(state, action) {
       return action.payload.pin ? 
       {
         ...state, 
-        editNote:{ isOpen:false, editingNote:{}},
+        editNote:{ isOpen:false, note:{}},
         pinnedNotesList: [...state.pinnedNotesList.map((note) => {
           return note.uuid === action.payload.uuid? action.payload: note;
         })]
@@ -70,12 +70,12 @@ function reducer(state, action) {
       :
       {
         ...state,
-        editNote:{ isOpen:false, editingNote:{}},
+        editNote:{ isOpen:false, note:{}},
         otherNotesList: [...state.otherNotesList.map((note) => {
           return note.uuid === action.payload.uuid? action.payload: note;
         })]
       };
-    case "SET_EDIT_NOTE":
+    case "SET_NOTE_TO_EDIT":
       return {
         ...state,
         editNote: action.payload

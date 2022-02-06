@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
 import { COLORS } from "../utils/Constants";
-import { ReactComponent as PinFill } from "../images/pin-fill.svg";
-import { ReactComponent as PinOutline } from "../images/pin-outline.svg";
-import { ReactComponent as ColorPaletteIcon } from "../images/color-palette-icon.svg";
+import { PinFillIcon, PinOutlineIcon, ColorPaletteIcon } from "../images/index";
 
 function EditNote() {
   const {
@@ -11,18 +9,18 @@ function EditNote() {
     dispatch,
   } = useNotes();
 
-  const [editedNote, setEditedNote] = useState({...editNote.editingNote});
+  const [note, setNote] = useState({...editNote.note});
   const [isColorPaletteOpen, setIsColorPaletteOpen] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (editedNote.title.trim() !== "" && editedNote.body.trim() !== "") {
-      dispatch({type: "EDIT_NOTE", payload: editedNote});
+    if (note.title.trim() !== "" && note.body.trim() !== "") {
+      dispatch({type: "EDIT_NOTE", payload: note});
     }
   }
 
   function handleChange(event) {
-    setEditedNote({ ...editedNote, [event.target.name]: event.target.value.trim() });
+    setNote({ ...note, [event.target.name]: event.target.value.trim() });
   }
 
   function toggleColorPalette(){
@@ -30,37 +28,37 @@ function EditNote() {
   }
   
   function handleColorChange(color){
-    setEditedNote({...editedNote, color:color});
+    setNote({...note, color:color});
   }
 
   function handlePinChange(){
-      dispatch({type:"TOGGLE_NOTE_PIN", payload:editedNote});
-      setEditedNote({ ...editedNote, pin: !editedNote.pin }); 
+      dispatch({type: "TOGGLE_NOTE_PIN", payload: note});
+      setNote({ ...note, pin: !note.pin }); 
   }
 
   return (
     <div className="outer-div-modal">
-      <div className="inner-div-modal" style={{ backgroundColor: `${editedNote.color}` }}>
+      <div className="inner-div-modal" style={{ backgroundColor: `${note.color}` }}>
         <div className="edit-note-header">
           <input
             className="edit-note-title"
             type="text"
             name="title"
-            value={ editedNote.title }
+            value={ note.title }
             onChange={ handleChange }
           />
           <button
             className="edit-note-pin"
             onClick={ handlePinChange }
           >
-            { editedNote.pin? <PinFill className="pin-fill"/>  : <PinOutline className="pin-outline"/> }
+            { note.pin? <PinFillIcon className="pin-fill"/>  : <PinOutlineIcon className="pin-outline"/> }
           </button>
         </div>
         <textarea
             className="edit-note-textarea"
             type="text"
             name="body"
-            value={ editedNote.body }
+            value={ note.body }
             onChange={ handleChange }
         />
         <div className="edit-note-footer">
@@ -81,7 +79,7 @@ function EditNote() {
             className="tag-select"
             name="tag"
             onChange={ handleChange }
-            value={ editedNote.tag }
+            value={ note.tag }
           >
             {
             tagOptions.map((tag) => {
