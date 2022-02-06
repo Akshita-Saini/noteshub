@@ -28,7 +28,7 @@ function Note({ note }) {
   }
   
   function handleColorChange(color){
-    dispatch({ type:"EDIT_NOTE_PROPERTY",  payload: {uuid: note.uuid, name: 'color', value: color, pin: note.pin} })
+    dispatch({ type:"EDIT_NOTE_COLOR_OR_TAG",  payload: {uuid: note.uuid, name: 'color', value: color, pin: note.pin} })
   }
 
 
@@ -60,7 +60,7 @@ function Note({ note }) {
         </div>
         <select 
           className="note-select"
-          onChange={(event) => { dispatch({ type:"EDIT_NOTE_PROPERTY", payload: { pin: note.pin, uuid: note.uuid, name: "tag", value: event.target.value } })}}
+          onChange={(event) => { dispatch({ type: "EDIT_NOTE_COLOR_OR_TAG", payload: { pin: note.pin, uuid: note.uuid, name: "tag", value: event.target.value } })}}
           value={ note.tag }
         >
           {

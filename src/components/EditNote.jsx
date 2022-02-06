@@ -15,7 +15,7 @@ function EditNote() {
   function handleSubmit(event) {
     event.preventDefault();
     if (note.title.trim() !== "" && note.body.trim() !== "") {
-      dispatch({type: "EDIT_NOTE", payload: note});
+      dispatch({type: "SAVE_EDITED_NOTE", payload: note});
     }
   }
 

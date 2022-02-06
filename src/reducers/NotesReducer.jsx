@@ -37,7 +37,7 @@ function reducer(state, action) {
         otherNotesList: [...state.otherNotesList.filter((note) => note.uuid!==action.payload.uuid)],
         pinnedNotesList: [{...action.payload, pin:!action.payload.pin}, ...state.pinnedNotesList]
       };
-    case "EDIT_NOTE_PROPERTY":
+    case "EDIT_NOTE_COLOR_OR_TAG":
       return action.payload.pin ? 
       {
         ...state, 
@@ -58,7 +58,7 @@ function reducer(state, action) {
           return note;
         })]
       };
-    case "EDIT_NOTE":
+    case "SAVE_EDITED_NOTE":
       return action.payload.pin ? 
       {
         ...state, 
