@@ -13,4 +13,14 @@ const COLORS = [
   { name: "Grey", value: "#E8EAED" },
 ];
 
-export { COLORS };
+const initialNote = {
+  title: "",
+  body: "",
+  pin: false,
+  date: "",
+  color: "#fff",
+  tag: "NONE",
+  uuid: null,
+};
+
+export { COLORS, initialNote };

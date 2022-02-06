@@ -21,20 +21,6 @@ function Note({ note }) {
     }
   }
 
-  function ColorOptions({note}) {
-    return (
-      <select
-        onChange={(event) => { dispatch({type:"EDIT_NOTE_PROPERTY", payload:{pin:note.pin, uuid:note.uuid, name:"color", value:event.target.value}}) }}
-        value={note.color}
-      >
-        {COLORS.map((color) => {
-          return <option value={color.value} key={color.name}>{color.name}</option>;
-        })}
-      </select>
-     
-    );
-  }
-
   function TagOptions({note}) {
     return (
       <select 

@@ -171,6 +171,8 @@ ul {
   border: none;
   outline: none;
   background-color: inherit;
+  font-family: var(--font-family);
+  color: var(--text-color-dark);
 }
 
 .take-note-textarea::placeholder {
@@ -203,10 +205,9 @@ ul {
   margin: 2px 0;
 }
 
-.color-box-icon {
+.color-palette-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #3b3d41;
 }
 
 .color-box,
