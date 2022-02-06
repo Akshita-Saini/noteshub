@@ -1,44 +1,30 @@
 import { EditNote, Note } from "./index";
 import { useNotes } from "../providers/NotesContextProvider";
+import { getFilteredNotesList } from "../utils/genericFunctions";
 
 function PinnedNotesList() {
   const {
     state: { selectedTag, pinnedNotesList, editNote}
   } = useNotes();
 
-  const filteredNotesList = pinnedNotesList.filter( (note) => {
-    if(selectedTag === "NONE"){
-      return <Note note={note}/>;
-    }else if(selectedTag === note.tag){
-      return <Note note={note}/>;
-    }
-  })
+  const filteredNotesList = getFilteredNotesList( pinnedNotesList, selectedTag );
   
   return (
     <div>
-      {editNote.isOpen && (
-        <EditNote />
-      )}
-
-      {filteredNotesList.length !== 0 && <h3>PINNED</h3>}
-      <div className="notesList-pinned">
-        {pinnedNotesList.map((note) => {
-          if (selectedTag === "NONE") {
-            return (
-              <Note
-                note={note}
-              />
-            );
-          } else if (selectedTag === note.tag) {
-            return (
-              <Note
-                note={note}
-              />
-            );
-          }
-          return null;
-        })}
-      </div>
+      { 
+        editNote.isOpen && <EditNote /> 
+      }
+      {
+        filteredNotesList.length !== 0 && 
+        <>
+          <h3>PINNED</h3>
+          <div className="notesList-pinned">
+            {
+              filteredNotesList.map( note => <Note note={note}  key={note.uuid} />)
+            }
+          </div>
+        </>
+      }
     </div>
   );
 }
