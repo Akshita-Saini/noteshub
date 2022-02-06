@@ -1,5 +1,5 @@
 import logo from "../images/post-it.png";
-import { ReactComponent as MenuIcon }  from "../images/menu-icon.svg";
+import {  MenuIcon }  from "../images/index";
 
 function Header() {
   return (

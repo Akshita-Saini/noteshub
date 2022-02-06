@@ -1,7 +1,6 @@
-import { ReactComponent as TagIcon } from "../images/tag-icon.svg";
 import { useNotes } from "../providers/NotesContextProvider";
 import { getTagColor } from "../utils/genericFunctions";
-import { ReactComponent as HomeIcon } from "../images/home-icon.svg";
+import { HomeIcon, TagIcon } from "../images/index";
 
 function Tag({ tagName }) {
     const {

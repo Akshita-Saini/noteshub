@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
 import { Tag, NewTag } from "./index";
-import { ReactComponent as AddLabelIcon } from "../images/add-label-icon.svg";
+import { AddLabelIcon } from "../images/index";
 
 function SideBar() {
   const [newTag, setNewTag] = useState("");
