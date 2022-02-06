@@ -12,7 +12,6 @@ function PinnedNotesList() {
     }else if(selectedTag === note.tag){
       return <Note note={note}/>;
     }
-
   })
   
   return (

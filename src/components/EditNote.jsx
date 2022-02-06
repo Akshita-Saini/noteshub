@@ -40,7 +40,7 @@ function EditNote() {
 
   return (
     <div className="outer-div-modal">
-      <div className="inner-div-modal" style={{backgroundColor:editedNote.color}}>
+      <div className="inner-div-modal" style={{ backgroundColor: `${editedNote.color}` }}>
         <div className="edit-note-header">
           <input
             className="edit-note-title"
@@ -60,7 +60,7 @@ function EditNote() {
             className="edit-note-textarea"
             type="text"
             name="body"
-            value={editedNote.body}
+            value={ editedNote.body }
             onChange={ handleChange }
         />
         <div className="edit-note-footer">
@@ -71,7 +71,7 @@ function EditNote() {
                 <div className="note-color-box">
                 {
                   COLORS.map(color => {
-                    return <div className="color" style={{backgroundColor:color.value}} onClick={() => handleColorChange(color.value)}></div>;
+                    return <div className="color" style={{ backgroundColor: `${color.value}` }} onClick={() => handleColorChange(color.value)}></div>;
                   })
                 }
                 </div>
@@ -81,11 +81,11 @@ function EditNote() {
             className="tag-select"
             name="tag"
             onChange={ handleChange }
-            value={editedNote.tag}
+            value={ editedNote.tag }
           >
             {
             tagOptions.map((tag) => {
-              return <option value={tag}>{tag}</option>;
+              return <option value={ tag }> { tag } </option>;
             })
             }
           </select>

@@ -5,7 +5,7 @@ import {
   TakeNote,
   PinnedNotesList,
   OtherNotesList,
-} from "./components/index.js";
+} from "./components/index.jsx";
 import "./styles.css";
 
 function NotesHub() {

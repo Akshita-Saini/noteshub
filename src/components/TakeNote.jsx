@@ -42,7 +42,7 @@ function TakeNote() {
 
   return (
     <div className="take-note" 
-      style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: note.color } }>
+      style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: `${note.color}` } }>
       <div className="take-note-header" style={{ display: showNote ? "flex" : "none" }}>
         <input
           className="take-note-title"
@@ -77,7 +77,7 @@ function TakeNote() {
               <div className="color-box">
                {
                  COLORS.map(color => {
-                   return <div className="color" style={{ backgroundColor:color.value }} onClick={() => handleColorChange(color.value)}></div>;
+                   return <div className="color" style={{ backgroundColor: `${color.value}` }} onClick={() => handleColorChange(color.value)}></div>;
                  })
                }
               </div>
@@ -86,7 +86,7 @@ function TakeNote() {
         <select className="tag-select" onChange={ handleChange } value={ note.tag } name="tag">
             {
               tagOptions.map((tag) => {
-                return <option value={tag}>{tag}</option>;
+                return <option value={ tag }> { tag } </option>;
               })
             }
         </select>
