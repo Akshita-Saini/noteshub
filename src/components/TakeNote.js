@@ -21,7 +21,7 @@ function TakeNote() {
     setIsColorPaletteOpen(isColorPaletteOpen => !isColorPaletteOpen);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit() {
     if (note.title.trim() !== "" || note.body.trim() !== "") {
       dispatch({
         type: "ADD_NOTE",
@@ -42,15 +42,15 @@ function TakeNote() {
 
   return (
     <div className="take-note" 
-      style={!showNote && { ...takeNoteStyle, backgroundColor: note.color}}>
+      style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: note.color } }>
       <div className="take-note-header" style={{ display: showNote ? "flex" : "none" }}>
         <input
           className="take-note-title"
           type="text"
           placeholder="Title"
-          value={note.title}
+          value={ note.title }
           name="title"
-          onChange={handleChange}
+          onChange={ handleChange }
         />
         <button
           className="take-note-pin"
@@ -66,31 +66,31 @@ function TakeNote() {
         value={note.body}
         onClick={() => setShowNote(true)}
         name="body"
-        onChange={handleChange}
-        style={showNote? { fontSize: "1.05rem" }: takeNoteTextareaStyle }
+        onChange={ handleChange }
+        style={ showNote? { fontSize: "1.05rem" }: { ...takeNoteTextareaStyle } }
       />
       <div className="take-note-footer" style={{ display: showNote ? "flex" : "none" }}>
-        <div onMouseEnter={toggleColorPalette}>
+        <div onMouseEnter={ toggleColorPalette }>
           <ColorPaletteIcon className="color-palette-icon" />
           {
             isColorPaletteOpen &&    
               <div className="color-box">
                {
                  COLORS.map(color => {
-                   return <div className="color" style={{backgroundColor:color.value}} onClick={() => handleColorChange(color.value)}></div>;
+                   return <div className="color" style={{ backgroundColor:color.value }} onClick={() => handleColorChange(color.value)}></div>;
                  })
                }
               </div>
           }
         </div>
-        <select className="tag-select" onChange={handleChange} value={note.tag} name="tag">
+        <select className="tag-select" onChange={ handleChange } value={ note.tag } name="tag">
             {
               tagOptions.map((tag) => {
                 return <option value={tag}>{tag}</option>;
               })
             }
         </select>
-        <button className="note-close-btn" onClick={(event) => { handleSubmit(event) }}>
+        <button className="note-close-btn" onClick={ handleSubmit }>
           Close
         </button>
       </div>
