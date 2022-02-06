@@ -63,7 +63,6 @@ function EditNote() {
           </button>
         </div>
       </div>
-      ;
     </div>
   );
 }

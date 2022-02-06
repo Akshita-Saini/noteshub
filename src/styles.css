@@ -318,7 +318,7 @@ ul {
   justify-content: space-between;
 }
 
-.note-close-btn {
+.delete-btn {
   border: none;
   font-weight: bold;
   border-radius: 3px;

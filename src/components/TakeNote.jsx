@@ -29,8 +29,7 @@ function TakeNote() {
   }
 
   return (
-    <div className="take-note" 
-      style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: `${note.color}` } }>
+    <div className="take-note" style={ !showNote? {}: { ...takeNoteStyle, backgroundColor: `${note.color}` } }>
       <div className="take-note-header" style={{ display: showNote ? "flex" : "none" }}>
         <input
           className="take-note-title"
@@ -60,7 +59,7 @@ function TakeNote() {
       <div className="take-note-footer" style={{ display: showNote ? "flex" : "none" }}>
         <ColorOptions note={note} setNote={setNote} />
         <TagOptions note={note} setNote={setNote} />
-        <button className="note-close-btn" onClick={ handleSubmit }>
+        <button className="close-btn" onClick={ handleSubmit }>
           Close
         </button>
       </div>

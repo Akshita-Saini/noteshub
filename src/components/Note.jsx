@@ -35,7 +35,7 @@ function Note({ note }) {
       <div className="note-footer">
         <ColorOptions note={note} />
         <TagOptions note={note} dispatchTagChange />
-        <button className="note-close-btn" onClick={() => dispatch({ type: "DELETE_NOTE", payload: note })}>
+        <button className="delete-btn" onClick={() => dispatch({ type: "DELETE_NOTE", payload: note })}>
           <DeleteIcon className="delete-icon"/>
         </button>
       </div>
