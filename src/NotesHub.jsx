@@ -1,6 +1,5 @@
 import {
   Header,
-  Footer,
   SideBar,
   TakeNote,
   NotesList
@@ -20,7 +19,6 @@ function NotesHub() {
         <NotesList  listName="PINNED" listClass="notesList-pinned" notesList={pinnedNotesList}/>
         <NotesList  listName="OTHER" listClass="notesList-others" notesList={otherNotesList}/>
       </div>  
-      <Footer />
     </div>
   );
 }

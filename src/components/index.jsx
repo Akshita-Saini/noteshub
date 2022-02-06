@@ -1,5 +1,4 @@
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 import { TakeNote } from "./TakeNote";
 import { SideBar } from "./SideBar";
 import { EditNote } from "./EditNote";
@@ -11,7 +10,6 @@ import { NotesList } from "./NotesList";
 
 export {
   Header,
-  Footer,
   TakeNote,
   SideBar,
   EditNote,
