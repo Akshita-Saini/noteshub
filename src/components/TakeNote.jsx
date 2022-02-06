@@ -4,16 +4,14 @@ import { useNotes } from "../providers/NotesContextProvider";
 import { initialNote } from "../utils/Constants";
 import { PinFillIcon, PinOutlineIcon } from "../images/index";
 import { takeNoteStyle, takeNoteTextareaStyle } from "../utils/styles.jsx";
-import { ColorOptions } from "./ColorOptions";
+import { ColorOptions, TagOptions } from "./index";
+
 
 function TakeNote() {
   const [note, setNote] = useState(initialNote);
   const [showNote, setShowNote] = useState(false);
 
-  const {
-    state: { tagOptions },
-    dispatch,
-  } = useNotes();
+  const { dispatch } = useNotes();
 
   function handleSubmit() {
     if (note.title.trim() !== "" || note.body.trim() !== "") {
@@ -61,13 +59,7 @@ function TakeNote() {
       />
       <div className="take-note-footer" style={{ display: showNote ? "flex" : "none" }}>
         <ColorOptions note={note} setNote={setNote} />
-        <select className="tag-select" onChange={ handleChange } value={ note.tag } name="tag">
-            {
-              tagOptions.map((tag) => {
-                return <option value={ tag }> { tag } </option>;
-              })
-            }
-        </select>
+        <TagOptions note={note} setNote={setNote} />
         <button className="note-close-btn" onClick={ handleSubmit }>
           Close
         </button>

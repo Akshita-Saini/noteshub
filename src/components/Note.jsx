@@ -1,9 +1,9 @@
 import { useNotes } from "../providers/NotesContextProvider";
 import { PinFillIcon, PinOutlineIcon, DeleteIcon } from "../images/index";
-import { ColorOptions } from "./ColorOptions";
+import { ColorOptions, TagOptions } from "./index";
 
 function Note({ note }) {
-  const { dispatch, state: { tagOptions } } = useNotes();
+  const { dispatch } = useNotes();
 
   function editNoteTrigger(event, note) {
     if (
@@ -12,9 +12,9 @@ function Note({ note }) {
       event.target.localName !== "svg" &&
       event.target.localName !== "path" &&
       event.target.localName !== "span" &&
-      event.target.className !== 'note-color-box' &&
+      event.target.className !== 'color-box' &&
       event.target.className !== 'color' &&
-      event.target.className !== 'color-box-icon'
+      event.target.className !== 'color-palette-icon'
     ){
       dispatch({ type: "SET_NOTE_TO_EDIT", payload: { isOpen: true, note: note } });
     }
@@ -34,17 +34,7 @@ function Note({ note }) {
       <p className="note-body"> { note.body } </p>
       <div className="note-footer">
         <ColorOptions note={note} />
-        <select 
-          className="note-select"
-          onChange={(event) => { dispatch({ type: "EDIT_NOTE_COLOR_OR_TAG", payload: { pin: note.pin, uuid: note.uuid, name: "tag", value: event.target.value } })}}
-          value={ note.tag }
-        >
-          {
-            tagOptions.map((tag) => {
-              return <option value={ tag } key={ tag }> { tag } </option>;
-            })
-          }
-        </select>
+        <TagOptions note={note} dispatchTagChange />
         <button className="note-close-btn" onClick={() => dispatch({ type: "DELETE_NOTE", payload: note })}>
           <DeleteIcon className="delete-icon"/>
         </button>

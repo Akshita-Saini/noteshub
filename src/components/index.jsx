@@ -7,6 +7,7 @@ import { Tag } from "./Tag";
 import { NewTag } from "./NewTag";
 import { NotesList } from "./NotesList";
 import { ColorOptions } from "./ColorOptions";
+import { TagOptions } from "./TagOptions";
 
 export {
   Header,
@@ -17,5 +18,6 @@ export {
   Tag, 
   NewTag,
   NotesList,
-  ColorOptions
+  ColorOptions,
+  TagOptions
 };

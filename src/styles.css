@@ -234,7 +234,7 @@ ul {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.tag-select {
+.select-tag {
   font-size: 1rem;
   border: none;
   padding: 0.5rem 1rem;
@@ -243,7 +243,7 @@ ul {
   outline: 0;
 }
 
-.tag-select > option {
+.select-tag > option {
   color: #45474b;
   border: none;
 }

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNotes } from "../providers/NotesContextProvider";
 import { PinFillIcon, PinOutlineIcon } from "../images/index";
-import { ColorOptions } from "./ColorOptions";
+import { ColorOptions, TagOptions } from "./index";
 
 function EditNote() {
   const {
-    state: { tagOptions , editNote },
+    state: { editNote },
     dispatch,
   } = useNotes();
 
@@ -54,18 +54,7 @@ function EditNote() {
         />
         <div className="edit-note-footer">
           <ColorOptions note={note} setNote={setNote} />
-          <select
-            className="tag-select"
-            name="tag"
-            onChange={ handleChange }
-            value={ note.tag }
-          >
-            {
-            tagOptions.map((tag) => {
-              return <option value={ tag }> { tag } </option>;
-            })
-            }
-          </select>
+          <TagOptions note={note} setNote={setNote} />
           <button
             className="update-btn"
             onClick={ handleSubmit }
